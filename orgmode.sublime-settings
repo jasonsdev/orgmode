@@ -15,6 +15,21 @@
     "orgmode.autocomplete.date.cmd":"date",
     "orgmode.autocomplete.date":"%Y-%m-%d %H:%M",
     
+    // must sepcify this list directly at the moment as it's required to put local_file last in the list. It uses 
+    // a more general regex and overrides other resolvers otherwise. 
+    // TODO: fix local_file regex
+    "orgmode.open_link.resolvers": [
+        "http",
+        "https",
+        "prompt",
+        "redmine",
+        "jira",
+        "crucible",
+        "fisheye",
+        "email",
+        "evernote",
+        "local_file"
+    ],
     
     //orgmode resolvers
     //jira
@@ -44,7 +59,16 @@
     "orgmode.open_link.resolver.local_file.force_into_sublime":"'*.txt', '*.org', '*.py', '*.rb', '*.html', '*.css', '*.js', '*.php', '*.c', '*.cpp', '*.h'",
     "orgmode.open_link.resolver.local_file.pattern":"^(?P<filepath>.+?)(?::(?P<row>\\d+)(?::(?P<col>\\d+))?)?$",
 
-
+    /* evernote
+        - To copy evernote link select "Copy Note Link" from Note menu or context menu
+        - You can paste the link in directly aka. [[evernote:///view/12345/s3/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000/]]
+        - Or you can replace the user_id and shard_id below with your info and use the short note_id only version aka. [[en:00000000-0000-0000-0000-000000000000]]
+        - Prefix en: or evernote: will work in all cases
+        - Evernote note link documentation ( http://dev.evernote.com/doc/articles/note_links.php )
+    */
+    "orgmode.open_link.resolver.evernote.pattern":"^(evernote:|en:)(?P<view_path>///view/[^/]+/s3/)?(?P<note_id>[^/]+)(?P<linked_note_id>/[^/]+)?/?$",
+    "orgmode.open_link.resolver.evernote.user_id": "12345",
+    "orgmode.open_link.resolver.evernote.shard_id": "s3",
 
     // HelpIt
     "cocoa" : {
